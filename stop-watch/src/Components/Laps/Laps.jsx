@@ -1,6 +1,9 @@
 import laps from "./Laps.module.css";
+import { useContext } from "react";
+import { LapsContext } from "../../context/lap-records";
 
 function Laps() {
+  const { laps: lapsArr } = useContext(LapsContext);
   return (
     <table className={laps.lapsTable}>
       <thead>
@@ -10,18 +13,12 @@ function Laps() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>00:06:20</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>00:06:25</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>00:06:25</td>
-        </tr>
+        {lapsArr.map((lap, index) => (
+          <tr key={index}>
+            <td>{index + 1}</td>
+            <td>{lap}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
