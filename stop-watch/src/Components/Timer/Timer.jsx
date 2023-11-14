@@ -4,8 +4,6 @@ import { LapsContext } from "../../context/lap-records";
 
 function Timer() {
   const [time, setTime] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
-
   const { laps: lapsArr, setLaps } = useContext(LapsContext);
 
   //REFERENCE TO INTERVAL ID
@@ -18,14 +16,12 @@ function Timer() {
         setTime((prevTime) => prevTime + 1);
       }, 1000);
     }
-    setIsRunning(true);
   }
 
   //FUNCTION FOR STOP BTN
   function handleTimeStop() {
     clearInterval(TimeCounter.current);
     TimeCounter.current = null;
-    setIsRunning(false);
   }
 
   // FORMATTING FUNCTION TO ADD 0
@@ -43,7 +39,6 @@ function Timer() {
   function handleLapCreation() {
     const now = new Date(time).getTime();
     const formattedNow = formatTime(now);
-    // setLaps((prevLaps) => [...prevLaps, formattedNow]);
     setLaps([...lapsArr, formattedNow]);
   }
 
