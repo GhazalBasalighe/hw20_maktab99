@@ -1,10 +1,14 @@
+import timer from "./Timer.module.css";
+
 function Timer() {
   return (
-    <div>
-      <p>33:12:00</p>
-      <button className="btn btn-start">Start</button>
-      <button className="btn btn-lap">Lap</button>
-      <button className="btn btn-stop">Stop</button>
+    <div className={timer.timerContainer}>
+      <span className={timer.timerCount}>33:12:00</span>
+      <div className={timer.btnSection}>
+        <button className={timer.btnStart}>Start</button>
+        <button className={timer.btnLap}>Lap</button>
+        <button className={timer.btnStop}>Stop</button>
+      </div>
     </div>
   );
 }

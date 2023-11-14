@@ -1,0 +1,54 @@
+.timerContainer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+    padding: 1rem 0;
+    gap: 24px;
+}
+
+.timerCount
+{
+    font-size: 48px;
+    font-weight: 400;
+}
+
+.btnSection
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+}
+
+.btn
+{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    outline: none;
+    border: none;
+    font-size: 24px;
+    font-weight: 400;
+    color: #F4F4F4;
+}
+
+
+.btnStart
+{
+    composes: btn;
+    background-color: #18A71E;
+}
+
+.btnLap
+{
+    composes: btn;
+    background-color: #187CA7;
+}
+
+.btnStop
+{
+    composes: btn;
+    background-color: #A71818;
+}
