@@ -1,0 +1,21 @@
+.lapsTable
+{
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.lapsTable thead th
+{
+    padding: 30px 0
+}
+
+.lapsTable tbody td
+{
+    padding: 10px 10px;
+}
+
+.lapsTable tbody tr:nth-child(odd)
+{
+    background-color: #187ca7;
+}
