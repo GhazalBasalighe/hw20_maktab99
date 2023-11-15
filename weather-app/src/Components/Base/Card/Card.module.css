@@ -15,16 +15,19 @@
     align-items: center;
     gap: 1rem;
     border-radius: 10px;
-    /* box-shadow: 1px 2px 4px 0px #222831; */
-    background: #fff;
     background: var(--card-bg);
     padding: 20px;
     font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
-.day
+.card:hover
 {
-    font-weight: 400;
+    box-shadow: 1px 2px 4px 0px #222831;
+    transform: scale(1.1);
+    background: #fff;
+    color: black;
 }
 
 .temp

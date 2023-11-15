@@ -5,14 +5,18 @@ import axios from "axios";
 import { BounceLoader } from "react-spinners";
 import { searchContext } from "../../context/search-context";
 
+import dateTools from "../../utils/formatDate";
+
 export function WeatherSection() {
   const [weather, setWeather] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { city } = useContext(searchContext);
+
   // REQUEST REQUIRED INFORMATION
   const API_KEY = "6b7df33df7ae43098f7101515231511";
   const searchedCity = city ? city : "Tehran";
-  const baseURL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${searchedCity}&days=3`;
+  const baseURL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${searchedCity}&days=4`;
+
   // FETCH WEATHER DATA
   async function fetchData() {
     try {
@@ -25,51 +29,15 @@ export function WeatherSection() {
     }
     setIsLoading(false);
   }
+
+  // DEBOUNCE REQUEST TO API
   useEffect(() => {
-    fetchData();
-    // Empty dependency array ensures that this effect runs once after the initial render
+    const timeoutID = setTimeout(() => {
+      fetchData();
+    }, 500);
+
+    return () => clearTimeout(timeoutID);
   }, [city]);
-
-  // WHAT DAY IN THE WEEK?
-  function handleFormatDay() {
-    // DAYS OF WEEK DATA
-    const daysOfWeek = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    const timeStamp = new Date(weather.location.localtime_epoch);
-    const dayName = daysOfWeek[timeStamp.getDay()];
-    return dayName;
-  }
-
-  //WHAT DATE (FORMATTED)
-  function handleFormatDate() {
-    //MONTHS DATA
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const date = new Date(weather.location.localtime);
-    const year = date.getFullYear();
-    const month = months[date.getMonth()];
-    const day = date.getDate();
-    return `${day} ${month} ${year}`;
-  }
 
   // SHOW LOADING SPINNER IF FETCH DATA IS NOT READY
   if (isLoading) {
@@ -79,8 +47,12 @@ export function WeatherSection() {
     <div className={weatherStyles.mainSection}>
       <div className={weatherStyles.left}>
         <div className={weatherStyles.topLeft}>
-          <span className={weatherStyles.day}>{handleFormatDay()}</span>
-          <span className={weatherStyles.date}>{handleFormatDate()}</span>
+          <span className={weatherStyles.day}>
+            {dateTools.formatDay(weather.location.localtime, "long")}
+          </span>
+          <span className={weatherStyles.date}>
+            {dateTools.formatDate(weather)}
+          </span>
           <span className={weatherStyles.city}>
             {/* <GrLocation /> */}
             <span>{weather.location.name}</span>
