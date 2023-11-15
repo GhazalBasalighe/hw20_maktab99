@@ -1,8 +1,13 @@
 import "./App.css";
-import { SearchBar } from "./Components/SearchBar/SearchBar";
+import { SearchBar, WeatherSection } from "./Components";
 
 function App() {
-  return <SearchBar />;
+  return (
+    <>
+      <SearchBar />
+      <WeatherSection />
+    </>
+  );
 }
 
 export default App;
