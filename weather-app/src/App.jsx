@@ -1,12 +1,15 @@
 import "./App.css";
 import React from "react";
 import { SearchBar, WeatherSection } from "./Components";
+import { SearchProvider } from "./context/search-context";
 
 function App() {
   return (
     <>
-      <SearchBar />
-      <WeatherSection />
+      <SearchProvider>
+        <SearchBar />
+        <WeatherSection />
+      </SearchProvider>
     </>
   );
 }

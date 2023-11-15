@@ -1,34 +1,34 @@
 import weatherStyles from "./WeatherSection.module.css";
 import { Card } from "../Base";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { BounceLoader } from "react-spinners";
+import { searchContext } from "../../context/search-context";
 
 export function WeatherSection() {
   const [weather, setWeather] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const { city } = useContext(searchContext);
   // REQUEST REQUIRED INFORMATION
   const API_KEY = "6b7df33df7ae43098f7101515231511";
-  const searchedCity = "Tehran";
-  const baseURL = `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${searchedCity}`;
-
-  useEffect(() => {
-    // FETCH WEATHER DATA
-    async function fetchData() {
-      try {
-        const response = await axios.get(baseURL);
-        const weatherData = response.data;
-        setWeather(weatherData);
-        console.log(weatherData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-      setIsLoading(false);
+  const searchedCity = city ? city : "Tehran";
+  const baseURL = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${searchedCity}&days=3`;
+  // FETCH WEATHER DATA
+  async function fetchData() {
+    try {
+      const response = await axios.get(baseURL);
+      const weatherData = response.data;
+      setWeather(weatherData);
+      console.log(weatherData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
+    setIsLoading(false);
+  }
+  useEffect(() => {
     fetchData();
     // Empty dependency array ensures that this effect runs once after the initial render
-  }, []);
+  }, [city]);
 
   // WHAT DAY IN THE WEEK?
   function handleFormatDay() {
@@ -127,12 +127,10 @@ export function WeatherSection() {
             </span>
           </div>
         </div>
-        <div className={weatherStyles.bottomRight}>
-          {/* <Card />
-          <Card />
+        <Card weather={weather} />
+        {/* <Card />
           <Card />
           <Card /> */}
-        </div>
       </div>
     </div>
   );

@@ -104,11 +104,3 @@
 }
 
 /* BOTTOM RIGHT SECTION  */
-.bottomRight
-{
-    background-color: var(--card-bg);
-    margin-top: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
