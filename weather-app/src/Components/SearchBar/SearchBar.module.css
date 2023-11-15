@@ -1,0 +1,16 @@
+.searchBar
+{
+    border-radius: 17px;
+    background: transparent;
+    border: 1px solid var(--border-white);
+    outline: none;
+    padding: 1.5rem;
+    width: 939px;
+}
+
+.searchBar::placeholder
+{
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
