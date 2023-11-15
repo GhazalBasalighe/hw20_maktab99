@@ -1,6 +1,6 @@
 import weatherStyles from "./WeatherSection.module.css";
 import { GrLocation } from "react-icons/gr";
-import { Card } from "../Card";
+import { Card } from "../Base";
 export function WeatherSection() {
   return (
     <div className={weatherStyles.mainSection}>
