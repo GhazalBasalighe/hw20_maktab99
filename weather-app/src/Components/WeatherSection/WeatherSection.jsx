@@ -10,6 +10,7 @@ import dateTools from "../../utils/formatDate";
 export function WeatherSection() {
   const [weather, setWeather] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
   const { city } = useContext(searchContext);
 
   // REQUEST REQUIRED INFORMATION
@@ -24,8 +25,9 @@ export function WeatherSection() {
       const weatherData = response.data;
       setWeather(weatherData);
       console.log(weatherData);
+      setErrorMessage("");
     } catch (error) {
-      console.error("Error fetching data:", error);
+      setErrorMessage("City Not Found!");
     }
     setIsLoading(false);
   }
@@ -42,6 +44,10 @@ export function WeatherSection() {
   // SHOW LOADING SPINNER IF FETCH DATA IS NOT READY
   if (isLoading) {
     return <BounceLoader color="#8ec8de" size={80} />;
+  }
+  //SHOW NOT FOUND MESSAGE IF THERE WAS NO RESPONSE
+  if (errorMessage) {
+    return <p className={weatherStyles.error}> {errorMessage} </p>;
   }
   return (
     <div className={weatherStyles.mainSection}>

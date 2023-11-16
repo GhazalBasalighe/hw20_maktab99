@@ -5,6 +5,16 @@
     justify-content: center;
 }
 
+.error
+{
+    color: white;
+    font-weight: 700;
+    font-size: 50px;
+    border-top: 3px groove #88ecef;
+    border-bottom: 3px groove #88ecef;
+    padding: 1.5rem 3rem;
+}
+
 /* ----------LEFT PART----------- */
 .left
 {
