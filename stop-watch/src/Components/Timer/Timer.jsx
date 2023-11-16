@@ -36,11 +36,23 @@ function Timer() {
   }
 
   // FUNCTION FOR LAP RECORDS
+  let lastLapTime = useRef(null);
   function handleLapCreation() {
-    const now = new Date(time).getTime();
-    const formattedNow = formatTime(now);
-    setLaps([...lapsArr, formattedNow]);
+    if (lastLapTime.current === null) {
+      lastLapTime.current = time;
+    } else {
+      const lapTimeDifference = time - lastLapTime.current;
+      const formattedDifference = formatTime(lapTimeDifference);
+      setLaps([...lapsArr, formattedDifference]);
+      lastLapTime.current = time;
+    }
   }
+  //SAME FUNCTION ABOVE BUT EACH LAP SHOWS OVERALL TIME
+  //  function handleLapCreation() {
+  //    const now = new Date(time).getTime();
+  //    const formattedNow = formatTime(now);
+  //    setLaps([...lapsArr, formattedNow]);
+  //  }
 
   return (
     <div className={timer.timerContainer}>
